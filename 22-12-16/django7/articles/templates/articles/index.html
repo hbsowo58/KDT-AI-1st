@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<img src="{% static 'google.png' %}">
+{% comment %} <a href="{% url 'hello' %}"> test로 이동 </a> {% endcomment %}
+<a href="{% url 'pages:index' %}">두번째 앱으로 이동</a>
+{% endblock  %}
+
