@@ -42,3 +42,30 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+---
+
+데이터의 흐름에 따라서, index.html 띄우기
+
+URL에
+
+http://127.0.0.1:8000/[입력되면]
+
+-> "프로젝트" urls.py에 접근
+
+<!-- path('admin/', admin.site.urls), -->
+위의 형식을 참고하면 path라는 함수
+
+<!-- /admin 이라는 요청이 왔을떄-->
+
+<!-- ex) http://127.0.0.1:8000/admin -->
+
+뒤의 콜백함수를 실행한다 여기서는 admin.site.urls
+
+콜백함수를 urls.py에 작성할 수 x
+
+함수 -> views.py
+
+애플리케이션 -> views를 작성 (template이 필요)
+
+애플리케이션 -> templeats라는 폴더 -> 랜더링할 파일을 생성
