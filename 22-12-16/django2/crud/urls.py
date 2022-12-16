@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # 무언가 추가
     path('articles/', views.index),
-    path('hello/', views.hello, name="aaa"),
+    path('hello/', views.hello, name="hello"),
 ]
