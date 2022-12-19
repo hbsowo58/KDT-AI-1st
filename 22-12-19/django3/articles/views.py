@@ -41,4 +41,5 @@ def create(request):
   # 3번
 
   # return render(request, 'articles/create.html')
+
   return redirect('articles:index')
