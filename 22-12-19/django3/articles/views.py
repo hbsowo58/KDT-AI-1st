@@ -1,0 +1,44 @@
+from django.shortcuts import render, redirect
+from .models import Article
+
+# Create your views here.
+def index(request):
+  # articles = Article.objects.all()
+
+  # articles = Article.objects.order_by('-pk')
+  # articles = Article.objects.order_by('-id')
+  # 'db에서' 내림차순으로 해서 가져와 화면에 출력
+
+  articles = Article.objects.all()[::-1]
+  # db에서 가져와서 '파이썬'으로 내림차순으로 변경해서 출력
+
+  context = {
+    'articles' : articles
+  }
+
+  return render(request, 'articles/index.html', context)
+
+def new(request):
+  return render(request, 'articles/new.html')
+
+
+def create(request):
+  title = request.POST.get('title')
+  content = request.POST.get('content')
+  # print(request)
+
+  article = Article()
+  article.title = title
+  article.content = content
+  article.save()
+  # 1번
+
+  # article = Article(title=title,content=content)
+  # article.save()
+  # 2번
+
+  # Article.objects.create(title=title, content=content)
+  # 3번
+
+  # return render(request, 'articles/create.html')
+  return redirect('articles:index')
