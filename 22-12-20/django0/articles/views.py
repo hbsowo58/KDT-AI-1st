@@ -29,28 +29,27 @@ def new(request):
   return render(request, 'articles/new.html', context)
 
 def create(request):
+  form = ArticleForm(request.POST)
+  if form.is_valid():
+    
+    # form.save()
+    # return redirect('articles:detail', form.pk)
+    # 1번방법
+    
+    article = form.save()
+    return redirect('articles:detail', article.pk)
+    # 2번방법
+  return redirect('articles:new')
+  
 
-
-  title = request.POST.get('title')
-  content = request.POST.get('content')
-  # print(request)
-
-  article = Article()
-  article.title = title
-  article.content = content
-  article.save()
-  # 1번
-
-  # article = Article(title=title,content=content)
+  # 기존 코드
+  # title = request.POST.get('title')
+  # content = request.POST.get('content')
+  # article = Article()
+  # article.title = title
+  # article.content = content
   # article.save()
-  # 2번
-
-  # Article.objects.create(title=title, content=content)
-  # 3번
-
-  # return render(request, 'articles/create.html')
-  # return redirect('articles:index')
-  return redirect('articles:detail', article.pk)
+  # return redirect('articles:detail', article.pk)
 
 def detail(request,pk):
 
