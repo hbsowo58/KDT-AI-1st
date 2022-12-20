@@ -32,12 +32,12 @@ def create(request):
   form = ArticleForm(request.POST)
   if form.is_valid():
     
-    # form.save()
-    # return redirect('articles:detail', form.pk)
+    form.save()
+    return redirect('articles:detail', form.pk)
     # 1번방법
     
-    article = form.save()
-    return redirect('articles:detail', article.pk)
+    # article = form.save()
+    # return redirect('articles:detail', article.pk)
     # 2번방법
   return redirect('articles:new')
   
