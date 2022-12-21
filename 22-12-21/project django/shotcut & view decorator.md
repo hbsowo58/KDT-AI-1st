@@ -118,5 +118,44 @@ def detail(request,pk):
   return render(request, 'articles/detail.html', context)
 ```
 
+---
+
+Django view decorators
+
+django는 view에 http 기능을 지원하기 위해 내장되어있는 여러가지 데코레이터를 지원
 
 
+
+참고) 데코레이터 -> 어떤 함수에 "기능"을 추가하고싶을때, (원본 함수는 수정하지 않고)
+
+-> 연장 또는 변경 또는 추가기능을 구현하고 싶을때
+
+
+
+### http 메소드에 따라 view함수에대한 접근을 제한 하는 데코레이터
+
+1.require_http_methods()
+
+2.require_GET() -> 사용안하길 권장
+
+3.require_POST()
+
+4.require_safe()
+
+
+
+require_http_methods() -> view함수가 "특정 http method"에만 허용되도록 데코레이터
+
+require_POST() -> view함수가 POST method에만 승인되도록 하는 데코레이터
+
+require_safe() -> view함수가 GET 및 HEAD method만 허용하도록 요구하는 데코레이터
+
+장고는 require_GET() -> require_safe() 애를 사용하길 권장
+
+
+
+# 결론:
+
+HTTP 요청에 따라 적절한 예외처리, 데코레이터 사용해서 서버를 보호할 수 있다
+
+/ 클라이언트(고객) 정확한 에러(상황)을 말해줄 수 있다

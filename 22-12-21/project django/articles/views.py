@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect , get_object_or_404
 from .models import Article
 from .forms import ArticleForm
 
+from django.views.decorators.http import require_http_methods, require_POST, require_safe
+
 # Create your views here.
+@require_safe
 def index(request):
   articles = Article.objects.all()
 
@@ -27,7 +30,7 @@ def index(request):
 #   }
   
 #   return render(request, 'articles/new.html', context)
-
+@ require_http_methods(['GET', 'POST'])
 def create(request):
   if request.method == 'POST':
     form = ArticleForm(request.POST)
@@ -49,6 +52,7 @@ def create(request):
       
   return render(request, 'articles/create.html', context)
 
+@require_safe
 def detail(request,pk):
 
 
@@ -66,15 +70,17 @@ def detail(request,pk):
 
   return render(request, 'articles/detail.html', context)
 
+
+@require_POST
 def delete(request,pk):
   # article = Article.objects.get(pk = pk)
   article = get_object_or_404(Article, pk=pk)
 
-  if request.method == 'POST':
-    article.delete()
-    return redirect('articles:index')
+  # if request.method == 'POST': -> 데코레이터가 있기때문에 POST를 검사하지 않아도 됨
+  article.delete()
+  return redirect('articles:index')
     # return render(request, 'articles/index.html')
-  return redirect('articles:detail', article.pk)
+  # return redirect('articles:detail', article.pk)
 
 # def edit(request,pk):
 #   article = Article.objects.get(pk=pk)
@@ -85,6 +91,7 @@ def delete(request,pk):
   
 #   return render(request,'articles/edit.html',context)
 
+@require_http_methods(['GET','POST'])
 def update(request, pk):
   # article = Article.objects.get(pk = pk)
   article = get_object_or_404(Article, pk=pk)
