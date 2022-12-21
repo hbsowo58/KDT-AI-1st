@@ -17,7 +17,7 @@
 
     <form action = "{% url 'photo_delete' photo.pk %}" method="POST">
         {% csrf_token %}
-        <Button>삭제</Button>
+        <input type="submit">삭제
     </form>
 
     <section>
