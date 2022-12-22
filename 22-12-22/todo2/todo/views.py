@@ -34,3 +34,18 @@ def todo_post(request):
     }
     
     return render(request, 'todo_post.html',context)
+
+def todo_edit(request,pk):
+    todo = Todo.objects.get(pk=pk)
+    
+    if request.method == "POST":
+        form = TodoForm(request.POST,instance=todo)
+        if form.is_valid():
+            form.save()
+            return redirect("todo_list")
+    else:
+        form = TodoForm(instance=todo)
+    context = {
+        "form" : form
+    }
+    return render(request, 'todo_post.html',context)
