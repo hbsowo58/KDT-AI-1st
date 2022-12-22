@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h1>DONE 목록</h1>
+    <p>
+      <a href="{% url 'todo_list' %}" class="btn btn-primary">홈으로</a>
+    </p>
+    <ul class="list-group">
+      {% for done in dones %}
+      <li class="list-group-item">
+        <a href="{% url 'todo_detail' pk=done.pk %}">{{ done.title }}</a>
+        {% if done.important %}
+          <span class="badge badge-danger">!</span>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock  %}
+
+
+
