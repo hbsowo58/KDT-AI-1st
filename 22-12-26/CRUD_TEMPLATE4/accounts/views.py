@@ -97,7 +97,7 @@ def update(request):
 
 
 @login_required
-@require_POST
+@require_http_methods(['GET', 'POST'])
 def change_password(request):
     
     # 2. change_password 폼에 무언가 입력했을때
